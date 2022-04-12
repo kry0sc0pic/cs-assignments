@@ -12,7 +12,7 @@ import random
 def generate(n: int = 3) -> int:
     num = ""
     for _ in range(n):
-        num+=str(random.randint(0, 9))
+        num+=str(random.randint(0, 9) if len(num) > 0 else random.randint(1, 9))
     return int(num)
 
 # Run with input
