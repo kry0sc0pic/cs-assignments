@@ -26,11 +26,13 @@ def factorial(n:int) -> int:
 
 def Sum(x: int, n: int):
     s = x
+    c = 1
     for i in range(3,x+1,2):
-        if(i%2==0):
+        if(c%2==0):
             s+= (power(x,i)/factorial(i))
         else:
             s-= (power(x,i)/factorial(i))   
+        c+=1
     return x
 
 x = int(input("Enter (x): "))
