@@ -4,21 +4,22 @@ Event participant (in notepad with a single space separating both).
 Write a method that would read the contents and creates a file named ‘athletics’,
 copying only those records from sports where the event name is ‘athletics’.
 
-@author: Krishaay Jois
 """
 
-def filterAthletics():
-    try:
-        f = open('files/sports.txt','r')
-        f_new = open('files/athletics.txt','w')
-        lines = []
-        for line in f.readlines():
-            if "athletics" in line:
-                lines.append(line)
-        f_new.writelines(lines)
-        f.close()
-        f_new.close()
-    except:
-        print("Error in filtering")
- 
-filterAthletics()
+def readfile(filename):
+    fs = open(filename, "r")
+    contents = fs.read()
+    fs.close()
+    return contents
+
+def filter_athletics():
+    details = readfile("files/sports.txt")
+    new_content = []
+    for i in details.split('\n'):
+        if i.split()[1].lower() == "athletics":
+            new_content.append(i)
+            
+    with open("files/athletics.txt") as f:
+        f.writelines(new_content)
+
+filter_athletics()

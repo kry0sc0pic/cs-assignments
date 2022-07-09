@@ -1,11 +1,11 @@
 """
-Accept 2 strings and check if they are anagrams
+Accept 2 strings and check if they are anagrams.
 
-@author: Krishaay Jois
-@notauthor: Suketu Patni (@SuketuPatni)
 """
+s1 = input()
+s2 = input()
 
-if sorted(input("Enter First String: ")) == sorted(input("Enter Second String: ")): 
-    print("ANAGRAM") 
-else: 
-    print("NON ANAGRAM")
+if sorted(s1) == sorted(s2):
+    print("anagrams")
+else:
+    print("not anagrams")

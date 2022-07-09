@@ -1,13 +1,13 @@
 """
 Accept a string and check if it contains all unique
-characters. Display the string and the message unique
-or not unique
+characters. Display the string and the message "unique"
+or "not unique".
 
-@author: Krishaay Jois
 """
-string = input("Enter String: ").strip()
-print(string)
-if(len(list(string.replace(' ',''))) > len(set(list(string.replace(' ',''))))):
-    print("NOT UNIQUE")
+s = input()
+for i in s:
+    if s.count(i) > 1:
+        print("not unique")
+        break
 else:
-    print("UNIQUE")
+    print("unique")

@@ -1,25 +1,19 @@
 """
-Accept 3 Marks of 5 students in a nested
-tuple.Display the total & average marks 
-of each student
+Accept 3 marks of 5 students in a nested
+tuple. Display the total & average marks 
+of each student.
 
-@author: Krishaay Jois
 """
-
-tup = []
-
-for i in range(5):
-    # stu_name = input("Enter Name: ")
-    stu_m1 = int(input("Marks 1: "))
-    stu_m2 = int(input("Marks 2: "))
-    stu_m3 = int(input("Marks 3: "))
-    tup.append((stu_m1,stu_m2,stu_m3))
-
-tup = tuple(tup)
-i = 1
-for i,j,k in tup:
-    print("Student:",str(i))
-    print("Total:",str(i+j+k))
-    print("Average:",str((i+j+k)/3))
-    print('\n')
-    i+=1
+main_tup = tuple()
+for _ in range(5):
+    num = input("Enter student name: ")
+    m1 = int(input("Enter first marks: "))
+    m2 = int(input("Enter second marks: "))
+    m3 = int(input("Enter third marks: "))
+    main_tup += ((num,m1,m2,m3),)
+    
+for num, m1, m2, m3 in main_tup:
+    total = m1 + m2 + m3
+    print(num)
+    print("Total marks:", total)
+    print("Average marks:", total/3)

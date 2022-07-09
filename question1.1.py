@@ -1,10 +1,9 @@
 """
-Write a program to print every number between 2 and n 
-which is divisble by n including m and n. Take m and n as input.
+Write a program to print every number between 2 and n (both inclusive)
+which is divisble by m. Take m and n as input.
 
 """
-n = int(input('Enter End Number: '))
-m = int(input('Enter Divisor Number: '))
-
-for i in range(2,n+1):
-    print(i if i%m==0 else '')
+m, n = int(input()), int(input())
+for i in range(2, n+1):
+    if not i % m:
+        print(i)

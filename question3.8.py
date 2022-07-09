@@ -1,45 +1,63 @@
 """
-WAP to work with a CSV file. The file contains the records of the student
+WRAP to work with a CSV file. The file contains the records of the student
 having the following format
 Rno, Name and marks (taken as a list)
 Write a menu driven program to do the following.
 a.Add a single record
 b.Add a multiple record in one GO
 c.Display all records
+
 """
 
-def addRecord(record: str):
-    with open('files/student.csv','a+') as f:
-        f.write(f'{record}\n')
+import csv
 
-def addMultipleRecord(records: list):
-    with open('files/student.csv','a+') as f:
-        for record in records:
-            f.write(f"{record}\n")
+MAINFILE = "files/student.csv"
+print("Welcome to the student CSV file datbase!")
 
-def displayRecord():
-    with open('files/student.csv','r') as f:
-        for line in f:
-            print(line)
+option = 0
 
-def main():
-    while True:
-        print("1. Add a single record")
-        print("2. Add a multiple record in one GO")
-        print("3. Display all records")
-        print("4. Exit")
-        choice = int(input("Enter your choice: "))
-        if choice == 1:
-            record = input("Enter the record: ").strip()
-            addRecord(record)
-        elif choice == 2:
-            records = input("Enter the records: ").split('\n')
-            addMultipleRecord(records)
-        elif choice == 3:
-            displayRecord()
-        elif choice == 4:
-            break
-        else:
-            print("Invalid choice")
+def add_one(rec1):
+    f = open(MAINFILE, "a", newline = "")
+    writer = csv.writer(f)
+    writer.writerow(rec1)
+    f.close()
 
-main()
+def add_many(recs):
+    f = open(MAINFILE, "a", newline = "")
+    writer = csv.writer(f)
+    writer.writerows(recs)
+    f.close()
+
+def display_all():
+    f = open(MAINFILE, "r", newline = "")
+    reader = csv.reader(f)
+    for i in reader:
+        print(*i, sep = ", ")
+    f.close()
+
+while True:
+    print("\nOptions")
+    print("1. Add a single record")
+    print("2. Add multiple records at once")
+    print("3. Display all records")
+    print("4. Quit menu")
+    print("\nWhat do you wish to do? Enter the option number: ")
+    option = int(input())
+    
+    if option == 1:
+        new_rec = eval(input("Enter new record as a list: "))
+        add_one(new_rec)
+        print(f"\n{new_rec} added to CSV file database")
+
+    elif option == 2:
+        new_recs = eval(input("Enter new records as a nested list: "))
+        add_many(new_recs)
+        print("New records added to CSV file database")
+        
+    elif option == 3:
+        display_all()
+
+    elif option == 4:
+        break
+
+print("Menu exited")

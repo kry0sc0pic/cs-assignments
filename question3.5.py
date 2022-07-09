@@ -2,31 +2,20 @@
 Create a textfile with 5 lines in it. Read the textfile line by line and display each
 word separated by ‘#’
 
-@author: Krishaay Jois
 """
 
+def readfile(filename):
+    fs = open(filename, "r")
+    contents = fs.read()
+    fs.close()
+    return contents
 
-def createFile():
-    try:
-        f = open('files/textfile35.txt', 'w')
-        f.write(
-            "This is Line 1\nThis is Line2\nThis is Line3\nThis is Line4\nThis is Line5")
-        f.close()
-    except:
-        print("Error in creating file")
+def create(filename, content_to_write):
+    fs = open(filename, "w")
+    fs.write(content_to_write)
+    fs.close()
 
-
-def hash_separate():
-    try:
-        f = open('files/textfile35.txt', 'r')
-        for line in f.readlines():
-            words = line.split()
-            for word in words:
-                print(word+"#", end="")
-            print()
-        f.close()
-    except:
-        print("Error in hashing")
-
-createFile()
-hash_separate()
+create("files/test.txt", eval(input("Enter 5 lines: ")))
+s = readfile("files/test.txt")
+for i in s.split("\n"):
+    print("#".join(i.split()))

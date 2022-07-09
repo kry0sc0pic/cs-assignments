@@ -10,50 +10,66 @@ Exit() End the application
 
 Call the functions using proper menu
 
-@author: Krishaay Jois
 """
 
-DB = {}
+department = {}
+option = 0
+print("Welcome to the department database")
 
-def displayopts() -> None:
-    # print("\n") 
-    print("1 -> Add")
-    print("2 -> Delete")
-    print("3 -> Update")
-    print("4 -> Display")
-    print("5 -> Exit")
-    print("---------------")
-def processOpt(opt: str) -> None:
-    global DB
-    if(opt == "1" or opt == "3"):
-        print("[+] New Record" if opt == "1" else "[+] Update Record")
-        deptNo = input("Department Number: ").strip()
-        deptName = input("Department Name: ").strip()
-        loc = input("LOC: ").strip()
-        DB[deptNo] = {
-            "deptName": deptName,
-            "loc": loc
-        }
-        print(f"Created {deptNo}" if opt == "1" else f"Updated {deptNo}")
-    elif(opt == "2"):
-        print("[-] Delete Record")
-        deptNo = input("Department Number: ").strip()
-        del DB[deptNo]
-        print(f"Deleted {deptNo}")
-    elif(opt == "4"):
-        print("Listing all records in DB\n")
-        for num,data in DB.items():
-            print(f"{num}:{data}")
-        print('------------------')
+def Add(deptno1, dname1, loc1):
+    department[deptno1] = [dname1, loc1]
+    print("\nDepartment", dname1, "added to database!")
+    
+def Delete(deptno1):
+    if department.get(deptno1, None):
+        department.pop(deptno1)
+        print("\nDepartment", deptno1, "deleted from database!")
     else:
-        print("[!] Unknown Option")
+        print("\nSorry, department number not found!")
+       
+def Update(deptno1, dname1):
+    if department.get(deptno1, None):
+        department[deptno1][0] = dname1
+        print("\nName of Department", deptno1, "updated in database!")
+    else:
+        print("\nSorry, department number not found!")
+    
+def Display():
+    print(department)
+    
+    
+while option != 5:
+    print("\nOptions")
+    print("1. Add a new department record into the database")
+    print("2. Delete department details from database")
+    print("3. Change a department's name or location")
+    print("4. Display all departments")
+    print("5. Quit menu")
+    print("\nWhat do you wish to do? Enter the option number: ")
+    option = int(input())
+    
+    if option == 1:
+        new_num = int(input("Enter new department number: "))
+        new_name = input("Enter new department name: ")
+        new_loc = input("Enter new department location: ")
+        Add(new_num, new_name, new_loc)
 
-shouldExit = False
-while(not shouldExit):
-    displayopts()
-    option = input("Enter Option: ").strip()
-    if(option == "5"):
-        shouldExit = True
-        print("Exiting..")
-    else:
-        processOpt(option)
+    elif option == 4:
+        Display()
+        
+    elif option != 5:
+        num = int(input("Enter department number: "))
+        isdept = department.get(num, None)
+        if not isdept:
+            print("Sorry, department number not found!")
+        else:
+            if option == 2:
+                Delete(num)
+                    
+            elif option == 3:
+                Update(
+                    num,
+                    input("Enter new department name: ")
+                )
+
+print("Menu exited")

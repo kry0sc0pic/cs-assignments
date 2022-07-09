@@ -1,5 +1,5 @@
 """
-WAP to work with a binary file. 
+WRAP to work with a binary file. 
 The file contains the records of the student
 having the following format.
 Sno, Name and marks (taken as a list)
@@ -9,88 +9,108 @@ a. Add a record
 b. Display all records
 c. Accept Sno and modify the marks of that student
 d. Accept Sno and modify the name of that student.
+
 """
 
-import pickle
+import pickle as pkl
+option = 0
+print("Welcome to the student binary file datbase!")
+MAINFILE = "files/student.dat"
 
-def addRecord(record: list) -> None:
-    with open('files/student','ab') as f:
-        pickle.dump(record,f)
-    
+def add(rec1):
+    f = open(MAINFILE, "ab")
+    pkl.dump(rec1, f)
+    f.close()
 
-def displayRecords() -> None:
-    with open('files/student','rb') as f:
-        try:
-            while True:
-                print(pickle.load(f))
-        except EOFError:
-            pass
+def display():
+    f = open(MAINFILE, "rb")
+    try:
+        while True:
+            print(pkl.load(f))
+    except:
+        f.close()
 
-
-def updateMarks(sno: int , marks: int) -> None:
-    newD = []
-    with open('files/student','rb') as f:
-        try:
-            while True:
-                d = pickle.load(f)
-                if d[0] == sno:
-                    d[2] = marks
-                newD.append(d)
-        except EOFError:
-            pass
-    with open('files/student','wb') as f:
-        for r in newD:
-            pickle.dump(r,f)
-
-
-def updateName(sno: int , name: str ) -> None:
-    newD = []
-    with open('files/student','rb') as f:
-        try:
-            while True:
-                d = pickle.load(f)
-                if d[0] == sno:
-                    d[1] = name
-                newD.append(d)
-        except EOFError:
-            pass
-    with open('files/student','wb') as f:
-        for r in newD:
-            pickle.dump(r,f)
-
-
-def main() -> None:
-    shouldExit = False
-    while not shouldExit:
-        # dispaly a menu and choose options
-        print("1. Add a record")
-        print("2. Display all records")
-        print("3. Update marks")
-        print("4. Update name")
-        print("5. Exit")
-        choice = int(input("Enter your choice: "))
-        if choice == 1:
-            record = []
-            sno = int(input("Enter the sno: "))
-            name = input("Enter the name: ")
-            marks = int(input("Enter the marks: "))
-            record.append(sno)
-            record.append(name)
-            record.append(marks)
-            addRecord(record)
-        elif choice == 2:
-            displayRecords()
-        elif choice == 3:
-            sno = int(input("Enter the sno: "))
-            marks = int(input("Enter the marks: "))
-            updateMarks(sno,marks)
-        elif choice == 4:
-            sno = int(input("Enter the sno: "))
-            name = input("Enter the name: ")
-            updateName(sno,name)
-        elif choice == 5:
-            shouldExit = True
+def Marks_mod(srno, new_marks):
+    f = open(MAINFILE, "rb+")
+    s = []
+    try:
+        while True:
+            s.append(pkl.load(f))
+    except:
+        f.seek(0)
+        isname = False
+        for i in s:
+            if i[0] == srno:
+                i[2] = new_marks
+                isname = True
+                break
+        if isname:
+            for i in s:
+                pkl.dump(i, f)
+            print("\nMarks modified")
         else:
-            print("Invalid choice")
+            print("Sorry, serial number not found!")
+        
+        f.close()
 
-main()
+
+def Name_mod(srno, new_name):
+    f = open(MAINFILE, "rb+")
+    s = []
+    try:
+        while True:
+            s.append(pkl.load(f))
+    except:
+        f.seek(0)
+        isname = False
+        for i in s:
+            if i[0] == srno:
+                i[1] = new_name
+                isname = True
+                break
+        if isname:
+            for i in s:
+                pkl.dump(i, f)
+            print("\nMarks modified")
+        else:
+            print("Sorry, serial number not found!")
+        
+        f.close()
+
+
+while option != 5:
+    print("\nOptions")
+    print("1. Add a record")
+    print("2. Display all records")
+    print("3. Modify the marks of the student of given serial number")
+    print("4. Modify the name of the student of given serial number")
+    print("5. Quit menu")
+    print("\nWhat do you wish to do? Enter the option number: ")
+    option = int(input())
+    
+    if option == 1:
+        new_num = int(input("\Enter serial number: "))
+        new_name = input("Enter student name: ")
+        new_marks = input("Enter marks: ")
+        add([new_num, new_name, new_marks])
+        print(f"\n{new_name} added to binary file database")
+
+    elif option == 2:
+        display()
+        
+    elif option != 5:
+        num = int(input("Enter serial number: "))
+
+        if option == 3:
+            Marks_mod(
+                num,
+                input("Enter new student marks: ")
+            )
+                
+        elif option == 4:
+            Name_mod(
+                num,
+                input("Enter new student name: ")
+            )
+
+print("Menu exited")

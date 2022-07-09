@@ -3,24 +3,31 @@ Create a textfile having 10 email address in it. Each address is stored in a
 separate line. Find out the most common domain name present in the file and
 display it.
 
-@author: Krishaay Jois
 """
 
-def find_domain():
-    try:
-        f = open('files/emails.txt', 'r')
-        domains = {}
-        for line in f.readlines():
-            words = line.split()
-            for word in words:
-                domain = word.split('@')[1]
-                if domain in domains:
-                    domains[domain] += 1
-                else:
-                    domains[domain] = 1
-        f.close()
-        print("Most Common Domain: ",max(domains, key=domains.get))
-    except:
-        print("Error in finding domain")
+def readfile(filename):
+    fs = open(filename, "r")
+    contents = fs.read()
+    fs.close()
+    return contents
 
-find_domain()
+def create(filename, content_to_write):
+    fs = open(filename, "w")
+    fs.write(content_to_write)
+    fs.close()
+
+def mode(list1):
+    return sorted(list1, key=list1.count)[-1]
+
+emails = []
+for _ in range(10):
+    emails.append(input("Enter email: "))
+
+create("files/emails.txt", "\n".join(emails))
+
+received_emails = readfile(emails)
+domains = []
+for i in received_emails.split("\n"):
+    domains.append(i.split("@")[-1])
+
+print(mode(domains))
