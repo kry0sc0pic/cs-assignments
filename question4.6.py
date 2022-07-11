@@ -1,4 +1,4 @@
-/*
+"""
 Stock Management system.
 Consider the following table structure istock
 Write the commands to :
@@ -18,6 +18,4 @@ accepting itemno from the user
 6. searchonitemname():To display the items after accepting item name from user
 7.searchissue_purchaelist(): accept transaction type ‘P’ or ‘I’ and display details
 8.quit()
-*/
-
--- TODO: ._.
+"""
