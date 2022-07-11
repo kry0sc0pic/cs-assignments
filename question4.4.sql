@@ -29,7 +29,7 @@ CREATE TABLE emp (empno int PRIMARY KEY, ename char(20), deptno int, sal int);
 CREATE TABLE dept (deptno int PRIMARY KEY, dname char(10), location char(30));
 
 -- 1) Display the cartisean product.
-SELECT * FROM emp, dept WHERE emp.deptno = dept.deptno;
+SELECT * FROM emp, dept;
 
 -- 2) Display ename,dname and dno .
 SELECT emp.ename, dept.dname, dept.deptno FROM emp, dept WHERE emp.deptno = dept.deptno;
