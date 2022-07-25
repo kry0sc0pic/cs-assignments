@@ -74,5 +74,5 @@ SELECT manufacturer FROM GYM WHERE manufacturer NOT LIKE 'A%';
 
 -- n) Display the price of items where manufacturer is Avon fitness . Give an alias name to price as
 -- “unit price of the product”. Arrange data in descending order of price.
-SELECT manufacturer, Price AS 'unit price of the product' FROM GYM WHERE manufacturer = 'Avon fitness';
+SELECT manufacturer, Price AS 'unit price of the product' FROM GYM WHERE manufacturer = 'Avon fitness' ORDER BY Price DESC;
 
