@@ -1,5 +1,5 @@
 ## CS Assignments
 
-My solutions to high school CS assignments.
+Solutions to high school CS assigments.
 
-Huge thanks to @[KrishaayJois](https://github.com/kry0sc0pic) for maintaining a copy of all the questions :)
+Ty to [@SuketuPatni](https://github.com/SuketuPatni) for debugging the code. Here is a cookie 🍪
