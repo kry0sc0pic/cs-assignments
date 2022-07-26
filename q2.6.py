@@ -4,13 +4,13 @@ forward, such as madam or racecar.
 Write a function check(string) which accept a string and check if it is a palindrome or not .
 Display appropriate messages.
 
-@author: Krishaay Jois
 """
 
-def check(string: str) -> bool:
-    if(string == string[::-1]):
-        return True
-    return False
+def is_palindrome(string):
+    if string == string[::-1]:
+        print("palindrome")
+    else:
+        print("not palindrome")
 
-string = input("Enter String: ").strip()
-print("Palindrome" if check(string) else "Not a palindrome")
+
+is_palindrome(input())
