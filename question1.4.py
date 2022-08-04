@@ -16,10 +16,10 @@ for i in range(5):
     tup.append((stu_m1,stu_m2,stu_m3))
 
 tup = tuple(tup)
-i = 1
+n = 1
 for i,j,k in tup:
-    print("Student:",str(i))
+    print("Student:",str(n))
     print("Total:",str(i+j+k))
     print("Average:",str((i+j+k)/3))
     print('\n')
-    i+=1
+    n+=1
